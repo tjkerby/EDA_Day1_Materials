@@ -1,0 +1,42 @@
+---
+title: "Exploratory Data Analysis: Day 1"
+---
+
+Explore a dataset with a question in mind. Use what you find to decide what to investigate next.
+
+## During class
+
+1. We will model an investigation using Titanic in a live Jupyter notebook.
+2. In your initial group, generate several questions about tornadoes.
+3. Choose one question and investigate it using visualization.
+4. Move into new groups to explain your findings and ask follow-up questions.
+
+[Open the lecture slides](slides.qmd)
+
+## Notebooks for Positron
+
+Download the complete course folder and open that folder in Positron so the notebooks can find the local data. Setup instructions are in the README.
+
+[Download all notebooks and data together](downloads/EDA_Day1_Notebooks_and_Data.zip)
+
+| Notebook | Purpose | Download | Read online |
+|---|---|---|---|
+| Titanic live scaffold | Complete the analysis live, with setup and prompts supplied | [`.ipynb`](notebooks/titanic_live_scaffold.ipynb) | [Preview](notebooks/titanic_live_scaffold.html) |
+| Titanic completed version | Reference code, results, and interpretations | [`.ipynb`](notebooks/titanic_complete.ipynb) | [Preview](notebooks/titanic_complete.html) |
+| Tornado starter | Load and understand the data, then conduct your own EDA | [`.ipynb`](notebooks/tornadoes_starter.ipynb) | [Preview](notebooks/tornadoes_starter.html) |
+| Plotting reference | Optional syntax support using Titanic examples | [`.ipynb`](notebooks/plotting_reference.ipynb) | [Preview](notebooks/plotting_reference.html) |
+
+## Datasets
+
+The files are bundled with the project. You do not need a data download during class.
+
+- [Titanic CSV](data/titanic.csv): 891 passenger records in the example subset.
+- [Tornado CSV](data/tornadoes.csv): 4,706 NOAA SPC whole-track records, **2015-2018**.
+- [Data guide](data_dictionary.qmd): row meanings, units, categories, and missing values.
+- [Sources and preparation](sources.qmd).
+
+The old slides used a different tornado table covering 2015-2022. All materials here use the bundled NOAA 2015-2018 snapshot.
+
+## What to bring to the discussion
+
+Keep your plot available before regrouping. Be ready to explain your question, the evidence, what changed in your thinking, and what you would investigate next.

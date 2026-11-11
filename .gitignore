@@ -1,0 +1,8 @@
+.venv/
+.quarto/
+.ipynb_checkpoints/
+__pycache__/
+outputs/
+!outputs/.gitkeep
+
+/.quarto/

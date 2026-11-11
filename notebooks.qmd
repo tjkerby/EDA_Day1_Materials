@@ -1,0 +1,44 @@
+---
+title: "Class notebooks"
+---
+
+## Instructor: live Titanic exploration
+
+Open **`notebooks/titanic_live_scaffold.ipynb`** in Positron. Setup is complete, while the analysis cells contain prompts to fill in live. Open **`titanic_complete.ipynb`** in a second tab for reference or recovery.
+
+The two versions have matching sections:
+
+1. Understand the passenger records and missing information.
+2. Optionally revisit the opening fare histogram.
+3. Count survivors by passenger class.
+4. Compare survival proportions using all passengers in each class.
+5. Add recorded sex through color and interpret the comparison.
+
+| Version | Notebook download | Browser preview |
+|---|---|---|
+| Live scaffold | [titanic_live_scaffold.ipynb](notebooks/titanic_live_scaffold.ipynb) | [Read online](notebooks/titanic_live_scaffold.html) |
+| Completed | [titanic_complete.ipynb](notebooks/titanic_complete.ipynb) | [Read online](notebooks/titanic_complete.html) |
+
+## Students: tornado starter
+
+Open **`notebooks/tornadoes_starter.ipynb`**. The first cells load the bundled CSV, preview a few records, show column types, and check missing information. The data guide explains units and interpretation. The final cells are open for your question and visualizations.
+
+[Download the tornado starter](notebooks/tornadoes_starter.ipynb) · [Read the starter online](notebooks/tornadoes_starter.html)
+
+## Optional plotting reference
+
+Examples use Titanic rather than prescribing a tornado investigation. Use the histogram, grouped comparison, scatterplot, or count/proportion example that helps with your own question.
+
+[Download the plotting reference](notebooks/plotting_reference.ipynb) · [Read online](notebooks/plotting_reference.html)
+
+## Local setup
+
+Open the whole project folder in Positron, then run:
+
+```bash
+uv sync
+```
+
+Select the interpreter in `.venv` as the notebook kernel. Run the setup cell before class. Dependencies install once, and the data then load locally.
+
+Restart the kernel and clear outputs in the live scaffold whenever you want a fresh teaching copy. Edit a copy if you want to keep the supplied scaffold unchanged.

@@ -1,0 +1,28 @@
+{
+  "coverage": "2015-2018",
+  "raw_rows": 4820,
+  "whole_track_rows_before_deduplication": 4707,
+  "exact_duplicates_removed": 1,
+  "teaching_rows": 4706,
+  "unknown_ef_ratings": 111,
+  "row_definition": "One whole-track tornado record, sg == 1, with exact duplicates removed.",
+  "transformations": [
+    "Retain 2015-2018 source files",
+    "Retain sg == 1",
+    "Remove exact duplicate rows",
+    "Rename selected fields",
+    "Recode EF -9 to missing",
+    "Recode zero coordinates to missing",
+    "Add year-event identifier and CST hour",
+    "Omit loss fields and county segment fields"
+  ],
+  "sha256": {
+    "data/raw/2015_torn.csv": "aeae7d89437fb75554c1a95a37a3eac62118b2279afb3ca47fdea390afe4f5f1",
+    "data/raw/2016_torn.csv": "611d82b15283762d8d74ed2fde3ed94444f0701630692cd38e58cf5beac86330",
+    "data/raw/2017_torn.csv": "f68063c6d68492cbdf5f5a2ca4a8a61ff68f3fab752d6a7294c0c12e5a90046b",
+    "data/raw/2018_torn.csv": "d6d384dded4fccdd801aedccdc3273d71602cff8d608d4f0006ca1a858ce498b",
+    "data/raw/titanic_seaborn.csv": "81787d320d7f7b03df935e91de8bd19e11d45c5bbcab86ef4d4a76dc91b7d4f2",
+    "data/titanic.csv": "36e3d7ef4aff1ed8a904f93f65908277435e797a0163e254f19a6cdad82f65df",
+    "data/tornadoes.csv": "de94de4881b911fdf243bacc7d18ee2cd3b290d94938fa01cc0df6a9af7d9698"
+  }
+}

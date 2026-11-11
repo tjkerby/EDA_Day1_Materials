@@ -1,0 +1,3 @@
+html,body,div,span,h1,h2,h3,h4,p,pre,code,ol,ul,li,figure,figcaption,section,aside { margin:0; padding:0; border:0; }
+html,body { width:100%; height:100%; }
+* { box-sizing:border-box; }

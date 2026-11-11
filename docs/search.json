@@ -1,0 +1,443 @@
+[
+  {
+    "objectID": "notebooks/plotting_reference.html",
+    "href": "notebooks/plotting_reference.html",
+    "title": "Plotting reference",
+    "section": "",
+    "text": "Optional support, not additional work to complete. Choose only the example that helps your question. These examples use Titanic so your tornado investigation remains your own.\nfrom pathlib import Pathimport pandas as pdimport matplotlib.pyplot as pltimport matplotlib.ticker as mtickimport seaborn as sns# Works when the notebook starts in the repository root or notebooks/.ROOT = Path.cwd()if not (ROOT / \"data/titanic.csv\").exists():    ROOT = ROOT.parenttitanic = pd.read_csv(ROOT / \"data/titanic.csv\")sns.set_theme(style=\"whitegrid\", context=\"talk\")"
+  },
+  {
+    "objectID": "notebooks/plotting_reference.html#distribution",
+    "href": "notebooks/plotting_reference.html#distribution",
+    "title": "Plotting reference",
+    "section": "Distribution",
+    "text": "Distribution\n\nsns.histplot(data=titanic, x=\"fare\", bins=25)plt.xlabel(\"Recorded fare (pounds sterling)\")plt.tight_layout()plt.show()"
+  },
+  {
+    "objectID": "notebooks/plotting_reference.html#numerical-comparisons-across-categoriesthis-example-uses-the-714-passengers-with-observed-age.-report-exclusions-whenever-your-variables-contain-missing-values.",
+    "href": "notebooks/plotting_reference.html#numerical-comparisons-across-categoriesthis-example-uses-the-714-passengers-with-observed-age.-report-exclusions-whenever-your-variables-contain-missing-values.",
+    "title": "Plotting reference",
+    "section": "Numerical comparisons across categoriesThis example uses the 714 passengers with observed age. Report exclusions whenever your variables contain missing values.",
+    "text": "Numerical comparisons across categoriesThis example uses the 714 passengers with observed age. Report exclusions whenever your variables contain missing values.\n\nknown_age = titanic.dropna(subset=[\"age\"])print(f\"Using {len(known_age)} of {len(titanic)} records\")sns.boxplot(data=known_age, x=\"pclass\", y=\"age\")plt.xlabel(\"Passenger class\")plt.ylabel(\"Age (years)\")plt.tight_layout()plt.show()\n\nUsing 714 of 891 records"
+  },
+  {
+    "objectID": "notebooks/plotting_reference.html#relationship-then-colorread-the-first-view-then-ask-whether-adding-a-category-helps.-overlapping-points-can-hide-observations.",
+    "href": "notebooks/plotting_reference.html#relationship-then-colorread-the-first-view-then-ask-whether-adding-a-category-helps.-overlapping-points-can-hide-observations.",
+    "title": "Plotting reference",
+    "section": "Relationship, then colorRead the first view, then ask whether adding a category helps. Overlapping points can hide observations.",
+    "text": "Relationship, then colorRead the first view, then ask whether adding a category helps. Overlapping points can hide observations.\n\nsns.scatterplot(data=known_age, x=\"age\", y=\"fare\", alpha=0.5)plt.xlabel(\"Age (years)\")plt.ylabel(\"Recorded fare (pounds sterling)\")plt.tight_layout()plt.show()\n\n\n\n\n\n\n\n\n\nsns.scatterplot(data=known_age, x=\"age\", y=\"fare\", hue=\"sex\", alpha=0.5)plt.xlabel(\"Age (years)\")plt.ylabel(\"Recorded fare (pounds sterling)\")plt.tight_layout()plt.show()"
+  },
+  {
+    "objectID": "notebooks/plotting_reference.html#counts-and-proportions-answer-different-questions",
+    "href": "notebooks/plotting_reference.html#counts-and-proportions-answer-different-questions",
+    "title": "Plotting reference",
+    "section": "Counts and proportions answer different questions",
+    "text": "Counts and proportions answer different questions\n\nsns.countplot(data=titanic, x=\"pclass\", order=[1, 2, 3])plt.xlabel(\"Passenger class\")plt.ylabel(\"Passengers\")plt.tight_layout()plt.show()\n\n\n\n\n\n\n\n\n\nrates = titanic.groupby(\"pclass\")[\"survived\"].mean()ax = rates.plot.bar(rot=0)ax.set(xlabel=\"Passenger class\", ylabel=\"Survival proportion\", ylim=(0, 1))plt.tight_layout()plt.show()"
+  },
+  {
+    "objectID": "notebooks/plotting_reference.html#generic-patterns-for-your-selected-variablesadapt-the-placeholders.-these-are-syntax-patterns-not-ready-to-run-cells.python-filter-deliberately-then-report-how-many-records-remain.subset-tornadoes.dropnasubsetyour_variableprintlensubset-of-lentornadoes-inspect-the-records-behind-an-unusual-value.tornadoes.sort_valuesyour_variable-ascendingfalse.head-aggregate-time-before-drawing-a-line.counts-tornadoes.groupbymonth.size.reindexrange1-13-fill_value0counts.plot.bara-logarithmic-axis-can-help-with-positive-values-spanning-a-wide-range.-check-zeros-first-and-explain-any-exclusions-or-transformations.-use-qualitative-color-for-categories-and-a-continuous-color-scale-for-quantities-when-appropriate.-direct-comparison-with-original-units-remains-useful.",
+    "href": "notebooks/plotting_reference.html#generic-patterns-for-your-selected-variablesadapt-the-placeholders.-these-are-syntax-patterns-not-ready-to-run-cells.python-filter-deliberately-then-report-how-many-records-remain.subset-tornadoes.dropnasubsetyour_variableprintlensubset-of-lentornadoes-inspect-the-records-behind-an-unusual-value.tornadoes.sort_valuesyour_variable-ascendingfalse.head-aggregate-time-before-drawing-a-line.counts-tornadoes.groupbymonth.size.reindexrange1-13-fill_value0counts.plot.bara-logarithmic-axis-can-help-with-positive-values-spanning-a-wide-range.-check-zeros-first-and-explain-any-exclusions-or-transformations.-use-qualitative-color-for-categories-and-a-continuous-color-scale-for-quantities-when-appropriate.-direct-comparison-with-original-units-remains-useful.",
+    "title": "Plotting reference",
+    "section": "Generic patterns for your selected variablesAdapt the placeholders. These are syntax patterns, not ready-to-run cells.python# Filter deliberately, then report how many records remain.subset = tornadoes.dropna(subset=[\"your_variable\"])print(len(subset), \"of\", len(tornadoes))# Inspect the records behind an unusual value.tornadoes.sort_values(\"your_variable\", ascending=False).head()# Aggregate time before drawing a line.counts = tornadoes.groupby(\"month\").size().reindex(range(1, 13), fill_value=0)counts.plot.bar()A logarithmic axis can help with positive values spanning a wide range. Check zeros first and explain any exclusions or transformations. Use qualitative color for categories and a continuous color scale for quantities when appropriate. Direct comparison with original units remains useful.",
+    "text": "Generic patterns for your selected variablesAdapt the placeholders. These are syntax patterns, not ready-to-run cells.python# Filter deliberately, then report how many records remain.subset = tornadoes.dropna(subset=[\"your_variable\"])print(len(subset), \"of\", len(tornadoes))# Inspect the records behind an unusual value.tornadoes.sort_values(\"your_variable\", ascending=False).head()# Aggregate time before drawing a line.counts = tornadoes.groupby(\"month\").size().reindex(range(1, 13), fill_value=0)counts.plot.bar()A logarithmic axis can help with positive values spanning a wide range. Check zeros first and explain any exclusions or transformations. Use qualitative color for categories and a continuous color scale for quantities when appropriate. Direct comparison with original units remains useful."
+  },
+  {
+    "objectID": "notebooks/titanic_live_scaffold.html",
+    "href": "notebooks/titanic_live_scaffold.html",
+    "title": "Titanic EDA: Live coding scaffold",
+    "section": "",
+    "text": "Question: How does survival vary by passenger class? What should we investigate after the first plot?\nSetup and discussion prompts are supplied. Complete the analysis cells live in Positron. The optional warmup can stay blank.\nThe paired notebooks use the same sections. Open the scaffold for class and keep the completed version in another tab.\nData: the bundled seaborn Titanic subset. See the data dictionary and source notes."
+  },
+  {
+    "objectID": "notebooks/titanic_live_scaffold.html#setup",
+    "href": "notebooks/titanic_live_scaffold.html#setup",
+    "title": "Titanic EDA: Live coding scaffold",
+    "section": "Setup",
+    "text": "Setup\nRun this cell before class. The dataset loads from the project folder without a download.\n\nfrom pathlib import Path\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport matplotlib.ticker as mtick\nimport seaborn as sns\n\n# Open the project folder in Positron and select its .venv interpreter.\n# Support kernels starting in the project root or in notebooks/.\nROOT = Path.cwd()\nif not (ROOT / \"data/titanic.csv\").is_file():\n    ROOT = ROOT.parent\nif not (ROOT / \"data/titanic.csv\").is_file():\n    raise FileNotFoundError(\"Open the project folder, then run this notebook again.\")\n\ntitanic = pd.read_csv(ROOT / \"data/titanic.csv\")\nsns.set_theme(style=\"whitegrid\", context=\"talk\")"
+  },
+  {
+    "objectID": "teaching_notes.html",
+    "href": "teaching_notes.html",
+    "title": "Teaching notes: Day 1",
+    "section": "",
+    "text": "Open slides.qmd in Quarto preview, then open titanic_live_scaffold.ipynb and titanic_complete.ipynb in Positron. Run the scaffold’s setup cell and select the project .venv kernel. Ask students to verify the loading cell in tornadoes_starter.ipynb before class.\nPrepare initial groups of 2-3 and your random group generator for later groups of 3-4. Where practical, distribute original teammates across the new groups."
+  },
+  {
+    "objectID": "teaching_notes.html#before-class",
+    "href": "teaching_notes.html#before-class",
+    "title": "Teaching notes: Day 1",
+    "section": "",
+    "text": "Open slides.qmd in Quarto preview, then open titanic_live_scaffold.ipynb and titanic_complete.ipynb in Positron. Run the scaffold’s setup cell and select the project .venv kernel. Ask students to verify the loading cell in tornadoes_starter.ipynb before class.\nPrepare initial groups of 2-3 and your random group generator for later groups of 3-4. Where practical, distribute original teammates across the new groups."
+  },
+  {
+    "objectID": "teaching_notes.html#timing",
+    "href": "teaching_notes.html#timing",
+    "title": "Teaching notes: Day 1",
+    "section": "Timing",
+    "text": "Timing\n\n\n\nClock\nActivity\n\n\n\n\n0-2\nFare histogram warmup\n\n\n2-9\nBrief question framing, then live Titanic exploration\n\n\n9-12\nTornado row structure and important field meanings\n\n\n12-16\nOriginal teams generate questions\n\n\n16-18\nSelect and refine a question\n\n\n18-36\nTeams investigate using visualization\n\n\n36-46\nRandomly regroup and share\n\n\n46-50\nWhole-class synthesis and next-class bridge"
+  },
+  {
+    "objectID": "teaching_notes.html#live-titanic-demonstration",
+    "href": "teaching_notes.html#live-titanic-demonstration",
+    "title": "Teaching notes: Day 1",
+    "section": "Live Titanic demonstration",
+    "text": "Live Titanic demonstration\nUse the scaffold. The completed notebook is the reference copy. Both versions have matching headings. The main path is intentionally short: survivor counts, survival proportions, then a grouped comparison using color.\n\nPreview a few rows and confirm the variables used today are complete.\nSkip the notebook’s optional fare histogram because it duplicates the warmup.\nCount survivors by class. Ask what information the plot leaves unresolved.\nReturn to all passengers and calculate survival proportions. Explain the denominator and why the mean of a complete 0/1 field is a proportion.\nAdd sex to the grouping, with color distinguishing the source categories. Ask students for a prediction before running it.\nEnd by proposing age as a next question. Avoid turning the demonstration into a survey of every Titanic variable.\n\n\n\n\nClass\nSurvivors\nPassengers\nSurvival proportion\n\n\n\n\n1\n136\n216\n63.0%\n\n\n2\n87\n184\n47.3%\n\n\n3\n119\n491\n24.2%\n\n\n\n\n\n\n\n\n\n\n\n\n\nClass\nFemale survivors / passengers\nFemale proportion\nMale survivors / passengers\nMale proportion\n\n\n\n\n1\n91 / 94\n96.8%\n45 / 122\n36.9%\n\n\n2\n70 / 76\n92.1%\n17 / 108\n15.7%\n\n\n3\n72 / 144\n50.0%\n47 / 347\n13.5%\n\n\n\nThese are associations in the 891-record subset. They do not isolate causal effects or describe a complete passenger manifest. The completed notebook retains group sizes, so the color comparison does not conceal its denominators.\nIf live coding takes too long, copy a cell from the completed notebook or use the plot-reference appendix. Protect the group investigation and sharing blocks."
+  },
+  {
+    "objectID": "teaching_notes.html#a-slightly-deeper-tornado-orientation",
+    "href": "teaching_notes.html#a-slightly-deeper-tornado-orientation",
+    "title": "Teaching notes: Day 1",
+    "section": "A slightly deeper tornado orientation",
+    "text": "A slightly deeper tornado orientation\nThe three-minute introduction covers details that influence the analysis:\n\nOne row is one whole tornado track. Extra state/county continuation records and one exact duplicate were removed in preparation. A track can cross state lines. Starting state does not list all states affected.\nTypes carry meaning. The identifier is a label, EF is ordered, state is nominal, and length and width are quantities with different units. Do not infer measurement meaning from a column’s storage dtype alone.\nClock time is CST for every record. Comparing CST hours does not automatically compare local daylight or nighttime.\nMissing ratings stay missing. EF0 is valid. There are 111 unknown ratings, leaving 4,595 records with an observed rating. Students should decide whether their question requires those values before filtering.\n\nEF categories reflect damage surveys and estimated winds. They are not direct wind measurements, and a larger category number is not a ratio of wind speeds. Source: https://www.weather.gov/oun/efscale.\nThe starter shows a few rows, column information and missingness, but no substantive tornado analysis. This gives students a foundation without steering their question choice."
+  },
+  {
+    "objectID": "teaching_notes.html#the-investigation",
+    "href": "teaching_notes.html#the-investigation",
+    "title": "Teaching notes: Day 1",
+    "section": "The investigation",
+    "text": "The investigation\nDuring brainstorming, reward distinct questions that students can connect to available fields. Offer general prompts only if needed: distribution, comparison, relationship, time or space, unusual observations, and missingness.\nWhen groups select a question, ask which rows, variables, units, comparison, and any denominator would provide evidence. Words like dangerous or worst need a measurable definition.\nAt around minute 25 ask what the first visualization leaves unresolved. At around minute 32 ask everyone to prepare their plot and explanation for regrouping.\nCirculation prompts:\n\nWhat do you actually see in this view?\nWhat does that leave unresolved?\nHow many records support the comparison?\nWhich observations drive the result?\nWhat other view would help distinguish your explanations?\n\nUse the separate plotting reference for syntax support. Avoid supplying a shared tornado question or a worked tornado result."
+  },
+  {
+    "objectID": "teaching_notes.html#sharing-and-closing",
+    "href": "teaching_notes.html#sharing-and-closing",
+    "title": "Teaching notes: Day 1",
+    "section": "Sharing and closing",
+    "text": "Sharing and closing\nRandomly regroup students, aiming for groups of 3-4 from different original teams. Allow one minute to move, about two minutes per person, and remaining time for follow-up questions. Every student explains their original team’s work independently.\nThe closing asks for a visualization that changed a question, something the data could not fully answer, or a useful approach learned from someone else. A well-explained inconclusive result is useful.\nBridge to Day 2: we compared Titanic passengers a few variables at a time. Next we will explore similarity across several characteristics together, then investigate how those profiles relate to survival."
+  },
+  {
+    "objectID": "data_dictionary.html",
+    "href": "data_dictionary.html",
+    "title": "Understanding the datasets",
+    "section": "",
+    "text": "tornadoes.csv: 4,706 whole-track tornado records, 2015-2018. One row is one tornado track after removing state/county continuation segments and one exact duplicate. Data: NOAA Storm Prediction Center, historical annual snapshots.\n\n\n\n\n\n\n\n\nColumn\nMeaning\nUnits or values\n\n\n\n\ntornado_id\nYear and source event number\nText identifier\n\n\nevent_date\nSource start date\nYYYY-MM-DD, CST\n\n\nyear\nStart year\n2015-2018\n\n\nmonth\nStart month\n1-12\n\n\nstart_time_cst\nStart time\nHH:MM:SS in Central Standard Time\n\n\nstart_hour_cst\nHour extracted from start time\n0-23, CST everywhere\n\n\nstart_state\nState attached to the track’s start\nPostal abbreviation\n\n\nef_rating\nEnhanced Fujita damage rating\nOrdered EF0-EF5 codes 0-5, or missing\n\n\npath_length_miles\nRecorded whole-track length\nMiles\n\n\nmax_width_yards\nRecorded maximum path width\nYards\n\n\nstart_latitude\nStart latitude\nDecimal degrees\n\n\nstart_longitude\nStart longitude\nDecimal degrees\n\n\nend_latitude\nEnd latitude\nDecimal degrees\n\n\nend_longitude\nEnd longitude\nDecimal degrees\n\n\nstates_affected\nNumber of states affected by track\nCount\n\n\ninjuries\nRecorded injuries\nPeople\n\n\nfatalities\nRecorded fatalities\nPeople\n\n\n\n\n\n\nEF rating is an ordered damage category associated with estimated winds. It is not a direct wind-speed measurement. EF0 is valid, not a missing value. There are 111 unknown ratings.\nCoordinates of zero in the raw source become missing. Other measurements retain the source values.\nCST is a shared reference clock. Time-of-day comparisons are not automatically local-time comparisons.\nWhole-track measurements can span several states. start_state does not identify every state affected.\nCounts describe these recorded events. Risk to a resident, area-adjusted rates, warning effectiveness, and causes require additional data.\nNo city, county name, narrative summary, local-time field, or event duration is supplied.\nSee source notes for sources and transformations."
+  },
+  {
+    "objectID": "data_dictionary.html#tornadoes",
+    "href": "data_dictionary.html#tornadoes",
+    "title": "Understanding the datasets",
+    "section": "",
+    "text": "tornadoes.csv: 4,706 whole-track tornado records, 2015-2018. One row is one tornado track after removing state/county continuation segments and one exact duplicate. Data: NOAA Storm Prediction Center, historical annual snapshots.\n\n\n\n\n\n\n\n\nColumn\nMeaning\nUnits or values\n\n\n\n\ntornado_id\nYear and source event number\nText identifier\n\n\nevent_date\nSource start date\nYYYY-MM-DD, CST\n\n\nyear\nStart year\n2015-2018\n\n\nmonth\nStart month\n1-12\n\n\nstart_time_cst\nStart time\nHH:MM:SS in Central Standard Time\n\n\nstart_hour_cst\nHour extracted from start time\n0-23, CST everywhere\n\n\nstart_state\nState attached to the track’s start\nPostal abbreviation\n\n\nef_rating\nEnhanced Fujita damage rating\nOrdered EF0-EF5 codes 0-5, or missing\n\n\npath_length_miles\nRecorded whole-track length\nMiles\n\n\nmax_width_yards\nRecorded maximum path width\nYards\n\n\nstart_latitude\nStart latitude\nDecimal degrees\n\n\nstart_longitude\nStart longitude\nDecimal degrees\n\n\nend_latitude\nEnd latitude\nDecimal degrees\n\n\nend_longitude\nEnd longitude\nDecimal degrees\n\n\nstates_affected\nNumber of states affected by track\nCount\n\n\ninjuries\nRecorded injuries\nPeople\n\n\nfatalities\nRecorded fatalities\nPeople\n\n\n\n\n\n\nEF rating is an ordered damage category associated with estimated winds. It is not a direct wind-speed measurement. EF0 is valid, not a missing value. There are 111 unknown ratings.\nCoordinates of zero in the raw source become missing. Other measurements retain the source values.\nCST is a shared reference clock. Time-of-day comparisons are not automatically local-time comparisons.\nWhole-track measurements can span several states. start_state does not identify every state affected.\nCounts describe these recorded events. Risk to a resident, area-adjusted rates, warning effectiveness, and causes require additional data.\nNo city, county name, narrative summary, local-time field, or event duration is supplied.\nSee source notes for sources and transformations."
+  },
+  {
+    "objectID": "data_dictionary.html#titanic",
+    "href": "data_dictionary.html#titanic",
+    "title": "Understanding the datasets",
+    "section": "Titanic",
+    "text": "Titanic\ntitanic.csv: 891 passenger records from seaborn’s example dataset. A passenger subset, not a complete manifest.\n\n\n\nColumn\nMeaning\n\n\n\n\nrow_id\nStable row number within this snapshot\n\n\nsurvived\n1 = survived, 0 = did not survive\n\n\npclass\nPassenger class, 1, 2, or 3\n\n\nsex\nSource-recorded category, female or male\n\n\nage\nRecorded age in years, sometimes missing\n\n\nfare\nRecorded fare in pounds sterling\n\n\nsibsp\nSiblings/spouses aboard\n\n\nparch\nParents/children aboard\n\n\nembarked\nPort code C, Q, or S, sometimes missing\n\n\n\nThe instructor demonstration uses survived, pclass, and sex. All 891 records have those three values. The other fields support follow-up questions and the later dimensionality reduction lesson.\nThe National Weather Service EF scale guide explains how damage indicators and estimated winds inform ratings."
+  },
+  {
+    "objectID": "slides.html#warmup-what-would-you-ask-next",
+    "href": "slides.html#warmup-what-would-you-ask-next",
+    "title": "Exploratory Data Analysis",
+    "section": "Warmup: what would you ask next?",
+    "text": "Warmup: what would you ask next?\n\n\n\n\n\nHistogram of recorded Titanic fares, with most observations in lower fare bins and a long right tail.\n\n\n\nWhat do you notice?\nWhat question would help you understand it?\nWhich view would you try next?\n\n\n0:00-2:00. Brief title, 30 seconds alone, 30 seconds with a neighbor, then a response. Source: seaborn Titanic subset, 891 records, 50-pound bins. Keep the warmup short to preserve live coding and group time."
+  },
+  {
+    "objectID": "slides.html#a-question-guides-the-next-view",
+    "href": "slides.html#a-question-guides-the-next-view",
+    "title": "Exploratory Data Analysis",
+    "section": "A question guides the next view",
+    "text": "A question guides the next view\nQuestion: What do we want to understand?\nEvidence: Which observations, variables, and comparison help?\nInterpretation: What does the view show, and what remains unresolved?\nFollow-up: What should we examine next?\n\n2:00-2:30. Briefly frame the cycle before opening the notebook. A broad first question is sufficient. Adapted from R for Data Science, https://r4ds.hadley.nz/EDA.html. The remaining demonstration happens in Positron."
+  },
+  {
+    "objectID": "slides.html#titanic-a-live-investigation",
+    "href": "slides.html#titanic-a-live-investigation",
+    "title": "Exploratory Data Analysis",
+    "section": "Titanic: a live investigation",
+    "text": "Titanic: a live investigation\nHow does survival vary by passenger class?\n891 passenger records in this subset. One row represents one passenger.\nOpen titanic_live_scaffold.ipynb in Positron.\nThe investigation will move from survivor counts to survival proportions, then add recorded sex through color.\n\n2:30-9:00. Open notebooks/titanic_live_scaffold.ipynb with setup already run. Keep titanic_complete.ipynb in a second tab. Skip the optional histogram because students already saw it in the warmup. Use the count plot to motivate a denominator, then add sex to the grouped comparison. Ask for a prediction before the final plot. Keep age as an open next question. Use the three appendix plot slides only if needed for reference or a technical interruption."
+  },
+  {
+    "objectID": "slides.html#tornado-data-what-does-one-row-mean",
+    "href": "slides.html#tornado-data-what-does-one-row-mean",
+    "title": "Exploratory Data Analysis",
+    "section": "Tornado data: what does one row mean?",
+    "text": "Tornado data: what does one row mean?\n4,706 whole tornado tracks, 2015-2018\n\n\n\n\n\n\n\n\n\n\n\ntornado_id\nevent_date\nstart_state\nef_rating\npath_length_miles\nmax_width_yards\n\n\n\n\n2015-549199\n2015-01-03\nMS\n0\n0.08\n50\n\n\n2015-549208\n2015-01-03\nMS\n1\n1.88\n50\n\n\n\nThese are the first two records, shown to explain the schema.\nA track can cross state lines. It still occupies one row.\n\n9:00-10:00. One whole-track record per tornado after removing continuation rows and one exact duplicate. This is the NOAA SPC snapshot, not the old Wikipedia table. start_state identifies the track’s beginning, not every state affected. Sources and processing are in sources.qmd and data/SOURCES.md."
+  },
+  {
+    "objectID": "slides.html#the-fields-we-can-explore",
+    "href": "slides.html#the-fields-we-can-explore",
+    "title": "Exploratory Data Analysis",
+    "section": "The fields we can explore",
+    "text": "The fields we can explore\n\n\n\nInformation\nVariables and meaning\n\n\n\n\nTime\nStart date, year, month, start hour in CST\n\n\nLocation\nStarting state, start and end coordinates\n\n\nTrack size\nLength in miles, maximum width in yards\n\n\nIntensity\nOrdered EF rating, sometimes missing\n\n\nOutcomes\nStates affected, injuries, fatalities\n\n\n\nThe identifier names a record. Its numeric-looking parts are not measurements.\n\n10:00-11:00. These are groups of related fields among 17 total columns. Clock times use CST for every record, including outside that zone. Raw location counts and personal risk are different quantities. Point to the full data guide rather than reading every column name aloud."
+  },
+  {
+    "objectID": "slides.html#ef-ratings-and-missing-information",
+    "href": "slides.html#ef-ratings-and-missing-information",
+    "title": "Exploratory Data Analysis",
+    "section": "EF ratings and missing information",
+    "text": "EF ratings and missing information\nEF0 through EF5 are ordered damage categories associated with estimated winds.\nEF0 is valid. An unknown rating is missing, not zero.\nThis snapshot has 111 unknown ratings. Keep those records until your question requires a decision about them.\nThe file has no duration, narrative summary, city name, population, or exposed-area denominator.\n\n11:00-12:00. EF is based on damage surveys and estimated winds, not a direct wind-speed measurement. EF4 is not twice EF2. Briefly show the starter’s loading cell if useful, but students should run it before class. A question using dates or track length does not automatically require dropping missing EF ratings. Source: https://www.weather.gov/oun/efscale and the bundled data availability check."
+  },
+  {
+    "objectID": "slides.html#round-1-question-generation",
+    "href": "slides.html#round-1-question-generation",
+    "title": "Exploratory Data Analysis",
+    "section": "Round 1: question generation",
+    "text": "Round 1: question generation\n4 minutes with your original group\nGenerate as many distinct questions as you can.\nFor each, identify the columns that could provide evidence.\nThe group with the most defensible distinct questions wins.\n\n12:00-16:00. The data introduction now has its own three-minute block. Let students brainstorm before looking at results. If needed, offer generic prompts: distribution, comparison, relationship, time or space, unusual observations, missingness. Avoid suggesting specific tornado findings."
+  },
+  {
+    "objectID": "slides.html#round-2-one-question-to-investigate",
+    "href": "slides.html#round-2-one-question-to-investigate",
+    "title": "Exploratory Data Analysis",
+    "section": "Round 2: one question to investigate",
+    "text": "Round 2: one question to investigate\n2 minutes with your original group\nOur question is …\nWe will examine these observations or groups …\nWe need these variables and units …\nOur first plot or summary will help because …\nFor a rate, name the denominator.\n\n16:00-18:00. Select a question that is both interesting and answerable with the fields available. Clarify words like dangerous or worst by asking which measurement the group means."
+  },
+  {
+    "objectID": "slides.html#round-3-your-investigation",
+    "href": "slides.html#round-3-your-investigation",
+    "title": "Exploratory Data Analysis",
+    "section": "Round 3: your investigation",
+    "text": "Round 3: your investigation\n18 minutes with your original group\nOpen tornadoes_starter.ipynb.\nMake a first visualization and describe what it shows.\nName something it leaves unresolved, then investigate further.\nKeep your plot available for sharing. An inconclusive finding can still be useful.\n\n18:00-36:00. Leave this slide visible. Around minute 25 ask what the first plot leaves unresolved. Around minute 32 prompt students to save or access their plot and prepare an explanation. The starter loads data and checks types/missingness, with open cells for their own analysis. Refer syntax questions to plotting_reference.ipynb. Each original team member should be able to explain the investigation."
+  },
+  {
+    "objectID": "slides.html#new-groups-sharing-investigations",
+    "href": "slides.html#new-groups-sharing-investigations",
+    "title": "Exploratory Data Analysis",
+    "section": "New groups: sharing investigations",
+    "text": "New groups: sharing investigations\n10 minutes with your new group\nEach person has about 2 minutes:\n\nWhat question did you investigate?\nWhat does your visualization show?\nHow did your question or approach change?\nWhat would you investigate next?\n\nListeners: ask a useful follow-up question.\n\n36:00-46:00. Use the random group generator. Aim for groups of 3-4, with original teammates separated where practical. Allow one minute to move, 6-8 minutes to explain, then discussion. Everyone shares their original team’s investigation. No whole-class presentation round is scheduled."
+  },
+  {
+    "objectID": "slides.html#what-moved-the-investigation-forward",
+    "href": "slides.html#what-moved-the-investigation-forward",
+    "title": "Exploratory Data Analysis",
+    "section": "What moved the investigation forward?",
+    "text": "What moved the investigation forward?\nA visualization that changed a question\nA question the available data could not fully answer\nAn approach you learned from someone else\nOne next question you would pursue\n\n46:00-49:00. Take two or three brief contributions. Help distinguish what students observed from what they inferred. Invite a useful inconclusive result as well as a clear pattern."
+  },
+  {
+    "objectID": "slides.html#next-class-passenger-profiles",
+    "href": "slides.html#next-class-passenger-profiles",
+    "title": "Exploratory Data Analysis",
+    "section": "Next class: passenger profiles",
+    "text": "Next class: passenger profiles\nWe compared Titanic passengers a few variables at a time.\nHow could we explore similarities across age, fare, family size, class, and embarkation together?\nWe will return to Titanic and add dimensionality reduction.\n\n49:00-50:00. Motivation only, with no algorithm teaching today. Ask for one investigative move students will use again."
+  },
+  {
+    "objectID": "slides.html#reference-survivor-counts",
+    "href": "slides.html#reference-survivor-counts",
+    "title": "Exploratory Data Analysis",
+    "section": "Reference: survivor counts",
+    "text": "Reference: survivor counts\n\n\n\nBar chart of survivor counts by passenger class: 136, 87, and 119.\n\n\nThis answers how many survived. What denominator would let us compare proportions?\n\nOptional appendix. The primary demonstration happens live in Positron. Source: bundled Titanic data."
+  },
+  {
+    "objectID": "slides.html#reference-survival-proportions",
+    "href": "slides.html#reference-survival-proportions",
+    "title": "Exploratory Data Analysis",
+    "section": "Reference: survival proportions",
+    "text": "Reference: survival proportions\n\n\n\nSurvival proportions by class: 63.0%, 47.3%, and 24.2%, with denominators 216, 184, and 491.\n\n\nEach denominator includes all passengers in that class in this subset.\n\nOptional appendix. Source: bundled Titanic data. All 891 outcomes and class values are complete."
+  },
+  {
+    "objectID": "slides.html#reference-adding-recorded-sex",
+    "href": "slides.html#reference-adding-recorded-sex",
+    "title": "Exploratory Data Analysis",
+    "section": "Reference: adding recorded sex",
+    "text": "Reference: adding recorded sex\n\n\n\nGrouped bar chart of survival proportions by passenger class and recorded sex.\n\n\nThe denominator now uses each class-by-sex group. These are descriptive associations.\n\nOptional appendix. The completed notebook displays all six group sizes and survivor counts. Source: bundled Titanic data."
+  },
+  {
+    "objectID": "slides.html#sources",
+    "href": "slides.html#sources",
+    "title": "Exploratory Data Analysis",
+    "section": "Sources",
+    "text": "Sources\n\nR for Data Science: EDA\nSeaborn Titanic data\nNOAA SPC Severe Weather Database\nNational Weather Service: EF scale\n\nThe website’s data guide documents the snapshots, units, and preparation.\n\nReference only. Tornado annual snapshots were retrieved from the public teaching mirror documented in sources.qmd. The package keeps the original raw files and preparation script."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Exploratory Data Analysis: Day 1",
+    "section": "",
+    "text": "Explore a dataset with a question in mind. Use what you find to decide what to investigate next."
+  },
+  {
+    "objectID": "index.html#during-class",
+    "href": "index.html#during-class",
+    "title": "Exploratory Data Analysis: Day 1",
+    "section": "During class",
+    "text": "During class\n\nWe will model an investigation using Titanic in a live Jupyter notebook.\nIn your initial group, generate several questions about tornadoes.\nChoose one question and investigate it using visualization.\nMove into new groups to explain your findings and ask follow-up questions.\n\nOpen the lecture slides"
+  },
+  {
+    "objectID": "index.html#notebooks-for-positron",
+    "href": "index.html#notebooks-for-positron",
+    "title": "Exploratory Data Analysis: Day 1",
+    "section": "Notebooks for Positron",
+    "text": "Notebooks for Positron\nDownload the complete course folder and open that folder in Positron so the notebooks can find the local data. Setup instructions are in the README.\nDownload all notebooks and data together\n\n\n\nNotebook\nPurpose\nDownload\nRead online\n\n\n\n\nTitanic live scaffold\nComplete the analysis live, with setup and prompts supplied\n.ipynb\nPreview\n\n\nTitanic completed version\nReference code, results, and interpretations\n.ipynb\nPreview\n\n\nTornado starter\nLoad and understand the data, then conduct your own EDA\n.ipynb\nPreview\n\n\nPlotting reference\nOptional syntax support using Titanic examples\n.ipynb\nPreview"
+  },
+  {
+    "objectID": "index.html#datasets",
+    "href": "index.html#datasets",
+    "title": "Exploratory Data Analysis: Day 1",
+    "section": "Datasets",
+    "text": "Datasets\nThe files are bundled with the project. You do not need a data download during class.\n\nTitanic CSV: 891 passenger records in the example subset.\nTornado CSV: 4,706 NOAA SPC whole-track records, 2015-2018.\nData guide: row meanings, units, categories, and missing values.\nSources and preparation.\n\nThe old slides used a different tornado table covering 2015-2022. All materials here use the bundled NOAA 2015-2018 snapshot."
+  },
+  {
+    "objectID": "index.html#what-to-bring-to-the-discussion",
+    "href": "index.html#what-to-bring-to-the-discussion",
+    "title": "Exploratory Data Analysis: Day 1",
+    "section": "What to bring to the discussion",
+    "text": "What to bring to the discussion\nKeep your plot available before regrouping. Be ready to explain your question, the evidence, what changed in your thinking, and what you would investigate next."
+  },
+  {
+    "objectID": "notebooks.html",
+    "href": "notebooks.html",
+    "title": "Class notebooks",
+    "section": "",
+    "text": "Open notebooks/titanic_live_scaffold.ipynb in Positron. Setup is complete, while the analysis cells contain prompts to fill in live. Open titanic_complete.ipynb in a second tab for reference or recovery.\nThe two versions have matching sections:\n\nUnderstand the passenger records and missing information.\nOptionally revisit the opening fare histogram.\nCount survivors by passenger class.\nCompare survival proportions using all passengers in each class.\nAdd recorded sex through color and interpret the comparison.\n\n\n\n\nVersion\nNotebook download\nBrowser preview\n\n\n\n\nLive scaffold\ntitanic_live_scaffold.ipynb\nRead online\n\n\nCompleted\ntitanic_complete.ipynb\nRead online"
+  },
+  {
+    "objectID": "notebooks.html#instructor-live-titanic-exploration",
+    "href": "notebooks.html#instructor-live-titanic-exploration",
+    "title": "Class notebooks",
+    "section": "",
+    "text": "Open notebooks/titanic_live_scaffold.ipynb in Positron. Setup is complete, while the analysis cells contain prompts to fill in live. Open titanic_complete.ipynb in a second tab for reference or recovery.\nThe two versions have matching sections:\n\nUnderstand the passenger records and missing information.\nOptionally revisit the opening fare histogram.\nCount survivors by passenger class.\nCompare survival proportions using all passengers in each class.\nAdd recorded sex through color and interpret the comparison.\n\n\n\n\nVersion\nNotebook download\nBrowser preview\n\n\n\n\nLive scaffold\ntitanic_live_scaffold.ipynb\nRead online\n\n\nCompleted\ntitanic_complete.ipynb\nRead online"
+  },
+  {
+    "objectID": "notebooks.html#students-tornado-starter",
+    "href": "notebooks.html#students-tornado-starter",
+    "title": "Class notebooks",
+    "section": "Students: tornado starter",
+    "text": "Students: tornado starter\nOpen notebooks/tornadoes_starter.ipynb. The first cells load the bundled CSV, preview a few records, show column types, and check missing information. The data guide explains units and interpretation. The final cells are open for your question and visualizations.\nDownload the tornado starter · Read the starter online"
+  },
+  {
+    "objectID": "notebooks.html#optional-plotting-reference",
+    "href": "notebooks.html#optional-plotting-reference",
+    "title": "Class notebooks",
+    "section": "Optional plotting reference",
+    "text": "Optional plotting reference\nExamples use Titanic rather than prescribing a tornado investigation. Use the histogram, grouped comparison, scatterplot, or count/proportion example that helps with your own question.\nDownload the plotting reference · Read online"
+  },
+  {
+    "objectID": "notebooks.html#local-setup",
+    "href": "notebooks.html#local-setup",
+    "title": "Class notebooks",
+    "section": "Local setup",
+    "text": "Local setup\nOpen the whole project folder in Positron, then run:\nuv sync\nSelect the interpreter in .venv as the notebook kernel. Run the setup cell before class. Dependencies install once, and the data then load locally.\nRestart the kernel and clear outputs in the live scaffold whenever you want a fresh teaching copy. Edit a copy if you want to keep the supplied scaffold unchanged."
+  },
+  {
+    "objectID": "sources.html",
+    "href": "sources.html",
+    "title": "Data sources and preparation",
+    "section": "",
+    "text": "The bundled titanic.csv contains 891 passenger records from the seaborn example dataset, a familiar subset associated with the Kaggle Titanic training data. It is a subset of Titanic passengers, not a complete passenger manifest or a random sample of everyone aboard.\n\nRetrieved through the GitHub connection on November 11, 2026.\nSource: https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv\nOriginal snapshot: raw/titanic_seaborn.csv.\nPreparation: retain eight variables used in the existing dimensionality reduction notebook and add row_id.\nRetain missing ages and embarkation codes. Day 1 uses complete survived, pclass, and sex fields, so it does not impute or discard rows.\nsex preserves the source’s recorded categories. survived is 1 for survived and 0 otherwise. fare is the recorded fare in pounds sterling, with possible shared-ticket complications.\nThe seaborn-data repository describes these files as example datasets and cautions that some are modified from their canonical sources: https://github.com/mwaskom/seaborn-data"
+  },
+  {
+    "objectID": "sources.html#titanic-demonstration",
+    "href": "sources.html#titanic-demonstration",
+    "title": "Data sources and preparation",
+    "section": "",
+    "text": "The bundled titanic.csv contains 891 passenger records from the seaborn example dataset, a familiar subset associated with the Kaggle Titanic training data. It is a subset of Titanic passengers, not a complete passenger manifest or a random sample of everyone aboard.\n\nRetrieved through the GitHub connection on November 11, 2026.\nSource: https://github.com/mwaskom/seaborn-data/blob/master/titanic.csv\nOriginal snapshot: raw/titanic_seaborn.csv.\nPreparation: retain eight variables used in the existing dimensionality reduction notebook and add row_id.\nRetain missing ages and embarkation codes. Day 1 uses complete survived, pclass, and sex fields, so it does not impute or discard rows.\nsex preserves the source’s recorded categories. survived is 1 for survived and 0 otherwise. fare is the recorded fare in pounds sterling, with possible shared-ticket complications.\nThe seaborn-data repository describes these files as example datasets and cautions that some are modified from their canonical sources: https://github.com/mwaskom/seaborn-data"
+  },
+  {
+    "objectID": "sources.html#tornado-group-investigation",
+    "href": "sources.html#tornado-group-investigation",
+    "title": "Data sources and preparation",
+    "section": "Tornado group investigation",
+    "text": "Tornado group investigation\nThe old slides contain a Wikipedia table for 2015-2022 but do not include the underlying data file. This package uses a 2015-2018 NOAA Storm Prediction Center snapshot instead. It does not contain city names, narrative summaries, or end times. The change in coverage and schema is explicit throughout these materials.\n\nPrimary publisher: NOAA / National Weather Service Storm Prediction Center, Severe Weather Database, https://www.spc.noaa.gov/wcm/#data\nField specification: https://www.spc.noaa.gov/wcm/data/SPC_severe_database_description.pdf\nAccessible copy of that specification: https://www.gsa.state.al.us/apps/CAGDV/Metadata/Hazards/SPC_severe_database_description.pdf\nAnnual NOAA CSV snapshots obtained from the teaching repository https://github.com/gabrielodom/PHC6701_r4ds/tree/main/_data/purrr_example_data\nOriginal files: raw/2015_torn.csv through raw/2018_torn.csv.\nThe four annual snapshots contain 4,820 rows including state and county continuation segments. Keep sg == 1 to retain whole tracks, then remove one exact duplicate. This produces 4,706 records.\nNOAA/SPC is the data publisher. The GitHub repository is the retrieval mirror, not a separate observing system. Treat this as a historical snapshot that can differ from later NOAA revisions.\nFederal NOAA data are public domain. Credit NOAA/SPC when reusing the data. General NOAA guidance: https://www.noaa.gov/information-technology/open-data-dissemination"
+  },
+  {
+    "objectID": "sources.html#preparation-choices",
+    "href": "sources.html#preparation-choices",
+    "title": "Data sources and preparation",
+    "section": "Preparation choices",
+    "text": "Preparation choices\nRun python scripts/prepare_data.py from the repository root to recreate the teaching CSVs from the bundled raw snapshots. No network access is needed.\n\nRetain whole-track rows (sg == 1). Extra state and continuing county segments would otherwise count some tornadoes more than once.\nRemove the one exact duplicate. Validate the resulting year-event identifier.\nRename fields and add tornado_id and start_hour_cst.\nRecode EF rating -9 as missing. Preserve 0 as the valid EF0 category.\nRecode zero latitude or longitude as missing. Preserve recorded zero path measurements rather than assigning an undocumented meaning to them.\nOmit monetary loss fields because the source’s units and coding change across years.\nOmit county codes and narrative fields absent from this snapshot.\n\nAll retained source records use timezone code 3, which the SPC specification defines as Central Standard Time. The hour is therefore CST for every record, not local clock time at each tornado location. No daylight saving adjustment is applied.\nstart_state names the state attached to the whole-track record, associated with the tornado’s start. A tornado can affect more than one state. Counts by this column are counts assigned to the starting state, not counts of all tornadoes affecting each state.\nThe preparation manifest records row counts and SHA-256 hashes. The snapshot has 111 unknown EF ratings, retained as missing. For analyses requiring EF, report the number of excluded records. Geographic comparisons of raw counts do not account for area, population, or reporting differences. These four years support descriptive investigation, not a long-term climate trend claim."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html",
+    "href": "notebooks/titanic_complete.html",
+    "title": "Titanic EDA: Completed reference",
+    "section": "",
+    "text": "Question: How does survival vary by passenger class? What should we investigate after the first plot?\nAll code and outputs are supplied. Use this as your teaching reference or recovery copy.\nThe paired notebooks use the same sections. Open the scaffold for class and keep the completed version in another tab.\nData: the bundled seaborn Titanic subset. See the data dictionary and source notes."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#setuprun-this-cell-before-class.-the-dataset-loads-from-the-project-folder-without-a-download.",
+    "href": "notebooks/titanic_complete.html#setuprun-this-cell-before-class.-the-dataset-loads-from-the-project-folder-without-a-download.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "SetupRun this cell before class. The dataset loads from the project folder without a download.",
+    "text": "SetupRun this cell before class. The dataset loads from the project folder without a download.\n\nfrom pathlib import Pathimport pandas as pdimport matplotlib.pyplot as pltimport matplotlib.ticker as mtickimport seaborn as sns# Open the project folder in Positron and select its .venv interpreter.# Support kernels starting in the project root or in notebooks/.ROOT = Path.cwd()if not (ROOT / \"data/titanic.csv\").is_file():    ROOT = ROOT.parentif not (ROOT / \"data/titanic.csv\").is_file():    raise FileNotFoundError(\"Open the project folder, then run this notebook again.\")titanic = pd.read_csv(ROOT / \"data/titanic.csv\")sns.set_theme(style=\"whitegrid\", context=\"talk\")"
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#the-recordswhat-does-one-row-represent-which-columns-can-help-us-compare-survival-across-passenger-classes",
+    "href": "notebooks/titanic_complete.html#the-recordswhat-does-one-row-represent-which-columns-can-help-us-compare-survival-across-passenger-classes",
+    "title": "Titanic EDA: Completed reference",
+    "section": "The recordsWhat does one row represent? Which columns can help us compare survival across passenger classes?",
+    "text": "The recordsWhat does one row represent? Which columns can help us compare survival across passenger classes?\n\ntitanic.head()\n\n\n\n\n\n\n\n\nrow_id\nsurvived\npclass\nsex\nage\nfare\nsibsp\nparch\nembarked\n\n\n\n\n0\n0\n0\n3\nmale\n22.0\n7.2500\n1\n0\nS\n\n\n1\n1\n1\n1\nfemale\n38.0\n71.2833\n1\n0\nC\n\n\n2\n2\n1\n3\nfemale\n26.0\n7.9250\n0\n0\nS\n\n\n3\n3\n1\n1\nfemale\n35.0\n53.1000\n1\n0\nS\n\n\n4\n4\n0\n3\nmale\n35.0\n8.0500\n0\n0\nS\n\n\n\n\n\n\n\nInterpretation: One row represents one passenger in this 891-record subset. This is not the complete Titanic manifest."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#available-informationare-the-fields-we-need-complete-age-and-embarkation-may-matter-for-later-questions.",
+    "href": "notebooks/titanic_complete.html#available-informationare-the-fields-we-need-complete-age-and-embarkation-may-matter-for-later-questions.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "Available informationAre the fields we need complete? Age and embarkation may matter for later questions.",
+    "text": "Available informationAre the fields we need complete? Age and embarkation may matter for later questions.\n\nprint(f\"Passenger records: {len(titanic):,}\")titanic.isna().sum()\n\nPassenger records: 891\n\n\nrow_id        0\nsurvived      0\npclass        0\nsex           0\nage         177\nfare          0\nsibsp         0\nparch         0\nembarked      2\ndtype: int64\n\n\nInterpretation: survived, pclass, and sex are complete. age has 177 missing values and embarked has 2. All 891 records contribute to the comparisons below."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#optional-warmup-the-fare-distributionwhat-do-you-notice-what-would-you-ask-next-this-matches-the-opening-slide-and-can-be-skipped-during-the-seven-minute-demonstration.",
+    "href": "notebooks/titanic_complete.html#optional-warmup-the-fare-distributionwhat-do-you-notice-what-would-you-ask-next-this-matches-the-opening-slide-and-can-be-skipped-during-the-seven-minute-demonstration.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "Optional warmup: the fare distributionWhat do you notice? What would you ask next? This matches the opening slide and can be skipped during the seven-minute demonstration.",
+    "text": "Optional warmup: the fare distributionWhat do you notice? What would you ask next? This matches the opening slide and can be skipped during the seven-minute demonstration.\n\nsns.histplot(data=titanic, x=\"fare\", bins=range(0, 551, 50))plt.xlabel(\"Recorded fare (pounds sterling)\")plt.ylabel(\"Passengers\")plt.tight_layout()plt.show()\n\n\n\n\n\n\n\n\nInterpretation: Most recorded fares are in the lower bins, with a long right tail. A comparison by class would be a reasonable next question."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#first-question-how-many-survivors-in-each-classbegin-with-a-count.-what-does-this-view-leave-unresolved-if-we-want-to-compare-survival-proportions",
+    "href": "notebooks/titanic_complete.html#first-question-how-many-survivors-in-each-classbegin-with-a-count.-what-does-this-view-leave-unresolved-if-we-want-to-compare-survival-proportions",
+    "title": "Titanic EDA: Completed reference",
+    "section": "First question: how many survivors in each class?Begin with a count. What does this view leave unresolved if we want to compare survival proportions?",
+    "text": "First question: how many survivors in each class?Begin with a count. What does this view leave unresolved if we want to compare survival proportions?\n\nsurvivors = titanic.loc[titanic[\"survived\"].eq(1)]counts = survivors.groupby(\"pclass\").size()display(counts)ax = counts.plot.bar(rot=0, color=\"#087F83\")ax.set(xlabel=\"Passenger class\", ylabel=\"Survivors\")plt.tight_layout()plt.show()\n\npclass\n1    136\n2     87\n3    119\ndtype: int64\n\n\n\n\n\n\n\n\n\nInterpretation: The survivor counts are 136, 87, and 119. The class sizes differ, so the counts alone do not answer the proportion question."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#follow-up-what-proportion-surviveduse-all-passengers-in-each-class-as-the-denominator.-for-complete-01-data-the-mean-equals-the-proportion-of-ones.",
+    "href": "notebooks/titanic_complete.html#follow-up-what-proportion-surviveduse-all-passengers-in-each-class-as-the-denominator.-for-complete-01-data-the-mean-equals-the-proportion-of-ones.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "Follow-up: what proportion survived?Use all passengers in each class as the denominator. For complete 0/1 data, the mean equals the proportion of ones.",
+    "text": "Follow-up: what proportion survived?Use all passengers in each class as the denominator. For complete 0/1 data, the mean equals the proportion of ones.\n\nclass_summary = titanic.groupby(\"pclass\")[\"survived\"].agg(    survivors=\"sum\", passengers=\"size\", survival_rate=\"mean\")display(class_summary.round(3))ax = class_summary[\"survival_rate\"].plot.bar(rot=0, color=\"#087F83\")ax.set(xlabel=\"Passenger class\", ylabel=\"Survival proportion\", ylim=(0, 1))ax.yaxis.set_major_formatter(mtick.PercentFormatter(1))plt.tight_layout()plt.show()\n\n\n\n\n\n\n\n\nsurvivors\npassengers\nsurvival_rate\n\n\npclass\n\n\n\n\n\n\n\n1\n136\n216\n0.630\n\n\n2\n87\n184\n0.473\n\n\n3\n119\n491\n0.242\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretation: The proportions are 63.0% (136/216), 47.3% (87/184), and 24.2% (119/491). The next question asks whether that aggregate pattern looks similar within sex categories."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#another-question-does-the-pattern-look-similar-within-sex-categorieskeep-the-class-comparison-and-add-recorded-sex-through-color.-predict-what-might-change-before-running-the-cell.",
+    "href": "notebooks/titanic_complete.html#another-question-does-the-pattern-look-similar-within-sex-categorieskeep-the-class-comparison-and-add-recorded-sex-through-color.-predict-what-might-change-before-running-the-cell.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "Another question: does the pattern look similar within sex categories?Keep the class comparison and add recorded sex through color. Predict what might change before running the cell.",
+    "text": "Another question: does the pattern look similar within sex categories?Keep the class comparison and add recorded sex through color. Predict what might change before running the cell.\n\ngroup_summary = titanic.groupby([\"pclass\", \"sex\"])[\"survived\"].agg(    survivors=\"sum\", passengers=\"size\", survival_rate=\"mean\")display(group_summary.round(3))rates = group_summary[\"survival_rate\"].unstack(\"sex\")ax = rates.plot.bar(rot=0, color=[\"#087F83\", \"#C76B2A\"])ax.set(xlabel=\"Passenger class\", ylabel=\"Survival proportion\", ylim=(0, 1))ax.yaxis.set_major_formatter(mtick.PercentFormatter(1))ax.legend(title=\"Recorded sex\")plt.tight_layout()plt.show()\n\n\n\n\n\n\n\n\n\nsurvivors\npassengers\nsurvival_rate\n\n\npclass\nsex\n\n\n\n\n\n\n\n1\nfemale\n91\n94\n0.968\n\n\nmale\n45\n122\n0.369\n\n\n2\nfemale\n70\n76\n0.921\n\n\nmale\n17\n108\n0.157\n\n\n3\nfemale\n72\n144\n0.500\n\n\nmale\n47\n347\n0.135\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretation: First-class survival proportions exceed third-class proportions within both recorded categories. Female survival proportions exceed male proportions within each class. These are descriptive associations in the passenger subset, not isolated causal effects."
+  },
+  {
+    "objectID": "notebooks/titanic_complete.html#where-would-we-go-nextdoes-age-help-explain-variation-within-a-class-by-sex-group-how-should-we-handle-the-missing-ageswhat-could-fare-family-size-and-embarkation-add-to-our-understanding-of-passenger-profileskeep-these-questions-open-for-day-2.-today-the-reusable-move-is-to-explain-why-the-next-view-helps-answer-the-next-question.",
+    "href": "notebooks/titanic_complete.html#where-would-we-go-nextdoes-age-help-explain-variation-within-a-class-by-sex-group-how-should-we-handle-the-missing-ageswhat-could-fare-family-size-and-embarkation-add-to-our-understanding-of-passenger-profileskeep-these-questions-open-for-day-2.-today-the-reusable-move-is-to-explain-why-the-next-view-helps-answer-the-next-question.",
+    "title": "Titanic EDA: Completed reference",
+    "section": "Where would we go next?Does age help explain variation within a class-by-sex group? How should we handle the missing ages?What could fare, family size, and embarkation add to our understanding of passenger profiles?Keep these questions open for Day 2. Today the reusable move is to explain why the next view helps answer the next question.",
+    "text": "Where would we go next?Does age help explain variation within a class-by-sex group? How should we handle the missing ages?What could fare, family size, and embarkation add to our understanding of passenger profiles?Keep these questions open for Day 2. Today the reusable move is to explain why the next view helps answer the next question."
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html",
+    "href": "notebooks/tornadoes_starter.html",
+    "title": "Tornado data: starter notebook",
+    "section": "",
+    "text": "Run the setup and inspection cells before your investigation. After brainstorming with your group, use the open cells at the end for your own EDA.\nDataset: NOAA SPC historical tornado records, 2015-2018. There are 4,706 whole-track records and 17 columns. One row represents one tornado track after removing duplicate and continuation records.\nData guide and source notes. The same information is also summarized below."
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html#load-the-local-csvdates-become-datetimes.-the-ef-rating-uses-pandas-nullable-integers-so-unknown-ratings-stay-missing-while-ef0-stays-zero.",
+    "href": "notebooks/tornadoes_starter.html#load-the-local-csvdates-become-datetimes.-the-ef-rating-uses-pandas-nullable-integers-so-unknown-ratings-stay-missing-while-ef0-stays-zero.",
+    "title": "Tornado data: starter notebook",
+    "section": "1. Load the local CSVDates become datetimes. The EF rating uses pandas nullable integers so unknown ratings stay missing while EF0 stays zero.",
+    "text": "1. Load the local CSVDates become datetimes. The EF rating uses pandas nullable integers so unknown ratings stay missing while EF0 stays zero.\n\nfrom pathlib import Pathimport pandas as pdimport matplotlib.pyplot as pltimport seaborn as snsROOT = Path.cwd()if not (ROOT / \"data/tornadoes.csv\").is_file():    ROOT = ROOT.parentif not (ROOT / \"data/tornadoes.csv\").is_file():    raise FileNotFoundError(\"Open the project folder, then run this notebook again.\")tornadoes = pd.read_csv(    ROOT / \"data/tornadoes.csv\",    parse_dates=[\"event_date\"],    dtype={\"tornado_id\": \"string\", \"start_state\": \"string\", \"ef_rating\": \"Int64\"},)sns.set_theme(style=\"whitegrid\", context=\"talk\")print(f\"Loaded {len(tornadoes):,} records and {tornadoes.shape[1]} columns.\")\n\nLoaded 4,706 records and 17 columns."
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html#preview-a-few-recordsread-the-units-in-the-column-names.-a-whole-track-can-begin-and-end-at-different-coordinates.",
+    "href": "notebooks/tornadoes_starter.html#preview-a-few-recordsread-the-units-in-the-column-names.-a-whole-track-can-begin-and-end-at-different-coordinates.",
+    "title": "Tornado data: starter notebook",
+    "section": "2. Preview a few recordsRead the units in the column names. A whole track can begin and end at different coordinates.",
+    "text": "2. Preview a few recordsRead the units in the column names. A whole track can begin and end at different coordinates.\n\ntornadoes[[    \"tornado_id\", \"event_date\", \"start_state\", \"ef_rating\",    \"path_length_miles\", \"max_width_yards\", \"states_affected\"]].head()\n\n\n\n\n\n\n\n\ntornado_id\nevent_date\nstart_state\nef_rating\npath_length_miles\nmax_width_yards\nstates_affected\n\n\n\n\n0\n2015-549199\n2015-01-03\nMS\n0\n0.08\n50.0\n1\n\n\n1\n2015-549208\n2015-01-03\nMS\n1\n1.88\n50.0\n1\n\n\n2\n2015-549220\n2015-01-03\nMS\n1\n1.03\n100.0\n1\n\n\n3\n2015-549233\n2015-01-03\nMS\n2\n8.03\n200.0\n1\n\n\n4\n2015-549251\n2015-01-03\nMS\n1\n9.89\n100.0\n1"
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html#understand-the-fields-kind-of-information-columns-meaning-identifier-tornado_id-a-year-event-identifier-not-a-measurement-date-event_date-year-month-source-start-date-and-derived-calendar-fields-clock-time-start_time_cst-start_hour_cst-cst-for-every-record-not-local-time-everywhere-starting-location-start_state-start_latitude-start_longitude-where-the-recorded-track-begins-ending-location-end_latitude-end_longitude-where-the-recorded-track-ends-track-size-path_length_miles-max_width_yards-total-length-and-maximum-width-in-different-units-intensity-ef_rating-ordered-ef-damage-category-not-a-direct-wind-speed-measurement-extent-and-outcomes-states_affected-injuries-fatalities-recorded-counts-associated-with-the-whole-track-ef0-is-valid.-an-unknown-ef-rating-is-na.-the-categories-are-ordered-but-ef4-does-not-mean-twice-the-wind-speed-of-ef2.-the-rating-is-based-on-damage-surveys-and-estimated-winds.a-multi-state-track-still-occupies-one-row.-start_state-assigns-it-to-its-beginning-not-every-state-it-affected.-all-start-hours-use-a-common-cst-clock-including-records-outside-that-zone.the-snapshot-has-no-city-or-county-name-narrative-description-end-time-duration-population-or-exposed-area-denominator.",
+    "href": "notebooks/tornadoes_starter.html#understand-the-fields-kind-of-information-columns-meaning-identifier-tornado_id-a-year-event-identifier-not-a-measurement-date-event_date-year-month-source-start-date-and-derived-calendar-fields-clock-time-start_time_cst-start_hour_cst-cst-for-every-record-not-local-time-everywhere-starting-location-start_state-start_latitude-start_longitude-where-the-recorded-track-begins-ending-location-end_latitude-end_longitude-where-the-recorded-track-ends-track-size-path_length_miles-max_width_yards-total-length-and-maximum-width-in-different-units-intensity-ef_rating-ordered-ef-damage-category-not-a-direct-wind-speed-measurement-extent-and-outcomes-states_affected-injuries-fatalities-recorded-counts-associated-with-the-whole-track-ef0-is-valid.-an-unknown-ef-rating-is-na.-the-categories-are-ordered-but-ef4-does-not-mean-twice-the-wind-speed-of-ef2.-the-rating-is-based-on-damage-surveys-and-estimated-winds.a-multi-state-track-still-occupies-one-row.-start_state-assigns-it-to-its-beginning-not-every-state-it-affected.-all-start-hours-use-a-common-cst-clock-including-records-outside-that-zone.the-snapshot-has-no-city-or-county-name-narrative-description-end-time-duration-population-or-exposed-area-denominator.",
+    "title": "Tornado data: starter notebook",
+    "section": "3. Understand the fields| Kind of information | Columns | Meaning ||—|—|—|| Identifier | tornado_id | A year-event identifier, not a measurement || Date | event_date, year, month | Source start date and derived calendar fields || Clock time | start_time_cst, start_hour_cst | CST for every record, not local time everywhere || Starting location | start_state, start_latitude, start_longitude | Where the recorded track begins || Ending location | end_latitude, end_longitude | Where the recorded track ends || Track size | path_length_miles, max_width_yards | Total length and maximum width in different units || Intensity | ef_rating | Ordered EF damage category, not a direct wind-speed measurement || Extent and outcomes | states_affected, injuries, fatalities | Recorded counts associated with the whole track |EF0 is valid. An unknown EF rating is <NA>. The categories are ordered, but EF4 does not mean twice the wind speed of EF2. The rating is based on damage surveys and estimated winds.A multi-state track still occupies one row. start_state assigns it to its beginning, not every state it affected. All start hours use a common CST clock, including records outside that zone.The snapshot has no city or county name, narrative description, end time, duration, population, or exposed-area denominator.",
+    "text": "3. Understand the fields| Kind of information | Columns | Meaning ||—|—|—|| Identifier | tornado_id | A year-event identifier, not a measurement || Date | event_date, year, month | Source start date and derived calendar fields || Clock time | start_time_cst, start_hour_cst | CST for every record, not local time everywhere || Starting location | start_state, start_latitude, start_longitude | Where the recorded track begins || Ending location | end_latitude, end_longitude | Where the recorded track ends || Track size | path_length_miles, max_width_yards | Total length and maximum width in different units || Intensity | ef_rating | Ordered EF damage category, not a direct wind-speed measurement || Extent and outcomes | states_affected, injuries, fatalities | Recorded counts associated with the whole track |EF0 is valid. An unknown EF rating is &lt;NA&gt;. The categories are ordered, but EF4 does not mean twice the wind speed of EF2. The rating is based on damage surveys and estimated winds.A multi-state track still occupies one row. start_state assigns it to its beginning, not every state it affected. All start hours use a common CST clock, including records outside that zone.The snapshot has no city or county name, narrative description, end time, duration, population, or exposed-area denominator.\n\ntornadoes.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 4706 entries, 0 to 4705\nData columns (total 17 columns):\n #   Column             Non-Null Count  Dtype         \n---  ------             --------------  -----         \n 0   tornado_id         4706 non-null   string        \n 1   event_date         4706 non-null   datetime64[ns]\n 2   year               4706 non-null   int64         \n 3   month              4706 non-null   int64         \n 4   start_time_cst     4706 non-null   object        \n 5   start_hour_cst     4706 non-null   int64         \n 6   start_state        4706 non-null   string        \n 7   ef_rating          4595 non-null   Int64         \n 8   path_length_miles  4706 non-null   float64       \n 9   max_width_yards    4706 non-null   float64       \n 10  start_latitude     4706 non-null   float64       \n 11  start_longitude    4706 non-null   float64       \n 12  end_latitude       4706 non-null   float64       \n 13  end_longitude      4706 non-null   float64       \n 14  states_affected    4706 non-null   int64         \n 15  injuries           4706 non-null   int64         \n 16  fatalities         4706 non-null   int64         \ndtypes: Int64(1), datetime64[ns](1), float64(6), int64(6), object(1), string(2)\nmemory usage: 629.7+ KB"
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html#check-missing-informationthis-checks-availability-without-choosing-your-research-question-or-dropping-records.",
+    "href": "notebooks/tornadoes_starter.html#check-missing-informationthis-checks-availability-without-choosing-your-research-question-or-dropping-records.",
+    "title": "Tornado data: starter notebook",
+    "section": "4. Check missing informationThis checks availability, without choosing your research question or dropping records.",
+    "text": "4. Check missing informationThis checks availability, without choosing your research question or dropping records.\n\nmissing = tornadoes.isna().sum()display(missing[missing.gt(0)].rename(\"missing_records\").to_frame())print(\"Unknown EF ratings:\", tornadoes[\"ef_rating\"].isna().sum())print(\"Records with an observed EF rating:\", tornadoes[\"ef_rating\"].notna().sum())\n\nUnknown EF ratings: 111\nRecords with an observed EF rating: 4595\n\n\n\n\n\n\n\n\n\nmissing_records\n\n\n\n\nef_rating\n111\n\n\n\n\n\n\n\nKeep the full DataFrame. If your chosen question requires EF rating, decide explicitly how to handle the 111 unknown values. A question using dates or path lengths may not need to exclude them..dropna() with no subset would drop records for every missing field. Prefer dropna(subset=[...]) for the variables your question actually needs, and report how many rows remain.## 5. Your investigationChoose a question after your group’s brainstorming. You can use ordinary pandas, seaborn, or matplotlib code below.Our question: …Variables, units, comparison, and any denominator: …\n\n# Your first summary or visualization.\n\nWhat does the result show? What remains unresolved? …Our follow-up question or check: …\n\n# Your follow-up summary or visualization."
+  },
+  {
+    "objectID": "notebooks/tornadoes_starter.html#before-regroupingkeep-your-plot-available.-be-ready-to-explain-the-question-evidence-how-your-investigation-changed-and-what-you-would-investigate-next.if-you-need-syntax-support-see-plotting_reference.ipynb.-its-examples-use-titanic-so-your-tornado-investigation-remains-your-own.",
+    "href": "notebooks/tornadoes_starter.html#before-regroupingkeep-your-plot-available.-be-ready-to-explain-the-question-evidence-how-your-investigation-changed-and-what-you-would-investigate-next.if-you-need-syntax-support-see-plotting_reference.ipynb.-its-examples-use-titanic-so-your-tornado-investigation-remains-your-own.",
+    "title": "Tornado data: starter notebook",
+    "section": "Before regroupingKeep your plot available. Be ready to explain the question, evidence, how your investigation changed, and what you would investigate next.If you need syntax support, see plotting_reference.ipynb. Its examples use Titanic so your tornado investigation remains your own.",
+    "text": "Before regroupingKeep your plot available. Be ready to explain the question, evidence, how your investigation changed, and what you would investigate next.If you need syntax support, see plotting_reference.ipynb. Its examples use Titanic so your tornado investigation remains your own."
+  }
+]

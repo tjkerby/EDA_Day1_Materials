@@ -1,0 +1,59 @@
+---
+title: "Understanding the datasets"
+---
+
+
+## Tornadoes
+
+`tornadoes.csv`: **4,706 whole-track tornado records, 2015-2018**. One row is one tornado track after removing state/county continuation segments and one exact duplicate. Data: NOAA Storm Prediction Center, historical annual snapshots.
+
+| Column | Meaning | Units or values |
+|---|---|---|
+| `tornado_id` | Year and source event number | Text identifier |
+| `event_date` | Source start date | YYYY-MM-DD, CST |
+| `year` | Start year | 2015-2018 |
+| `month` | Start month | 1-12 |
+| `start_time_cst` | Start time | HH:MM:SS in Central Standard Time |
+| `start_hour_cst` | Hour extracted from start time | 0-23, CST everywhere |
+| `start_state` | State attached to the track's start | Postal abbreviation |
+| `ef_rating` | Enhanced Fujita damage rating | Ordered EF0-EF5 codes 0-5, or missing |
+| `path_length_miles` | Recorded whole-track length | Miles |
+| `max_width_yards` | Recorded maximum path width | Yards |
+| `start_latitude` | Start latitude | Decimal degrees |
+| `start_longitude` | Start longitude | Decimal degrees |
+| `end_latitude` | End latitude | Decimal degrees |
+| `end_longitude` | End longitude | Decimal degrees |
+| `states_affected` | Number of states affected by track | Count |
+| `injuries` | Recorded injuries | People |
+| `fatalities` | Recorded fatalities | People |
+
+### Interpretation notes
+
+- EF rating is an ordered damage category associated with estimated winds. It is not a direct wind-speed measurement. EF0 is valid, not a missing value. There are 111 unknown ratings.
+- Coordinates of zero in the raw source become missing. Other measurements retain the source values.
+- CST is a shared reference clock. Time-of-day comparisons are not automatically local-time comparisons.
+- Whole-track measurements can span several states. `start_state` does not identify every state affected.
+- Counts describe these recorded events. Risk to a resident, area-adjusted rates, warning effectiveness, and causes require additional data.
+- No city, county name, narrative summary, local-time field, or event duration is supplied.
+- See [source notes](sources.qmd) for sources and transformations.
+
+## Titanic
+
+`titanic.csv`: 891 passenger records from seaborn's example dataset. A passenger subset, not a complete manifest.
+
+| Column | Meaning |
+|---|---|
+| `row_id` | Stable row number within this snapshot |
+| `survived` | 1 = survived, 0 = did not survive |
+| `pclass` | Passenger class, 1, 2, or 3 |
+| `sex` | Source-recorded category, female or male |
+| `age` | Recorded age in years, sometimes missing |
+| `fare` | Recorded fare in pounds sterling |
+| `sibsp` | Siblings/spouses aboard |
+| `parch` | Parents/children aboard |
+| `embarked` | Port code C, Q, or S, sometimes missing |
+
+The instructor demonstration uses `survived`, `pclass`, and `sex`. All 891 records have those three values. The other fields support follow-up questions and the later dimensionality reduction lesson.
+
+
+The [National Weather Service EF scale guide](https://www.weather.gov/oun/efscale) explains how damage indicators and estimated winds inform ratings.

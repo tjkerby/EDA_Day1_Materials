@@ -1,0 +1,88 @@
+---
+title: "Teaching notes: Day 1"
+---
+
+## Before class
+
+Open `slides.qmd` in Quarto preview, then open `titanic_live_scaffold.ipynb` and `titanic_complete.ipynb` in Positron. Run the scaffold's setup cell and select the project `.venv` kernel. Ask students to verify the loading cell in `tornadoes_starter.ipynb` before class.
+
+Prepare initial groups of 2-3 and your random group generator for later groups of 3-4. Where practical, distribute original teammates across the new groups.
+
+## Timing
+
+| Clock | Activity |
+|---|---|
+| 0-2 | Fare histogram warmup |
+| 2-9 | Brief question framing, then live Titanic exploration |
+| 9-12 | Tornado row structure and important field meanings |
+| 12-16 | Original teams generate questions |
+| 16-18 | Select and refine a question |
+| 18-36 | Teams investigate using visualization |
+| 36-46 | Randomly regroup and share |
+| 46-50 | Whole-class synthesis and next-class bridge |
+
+## Live Titanic demonstration
+
+Use the scaffold. The completed notebook is the reference copy. Both versions have matching headings. The main path is intentionally short: survivor counts, survival proportions, then a grouped comparison using color.
+
+- Preview a few rows and confirm the variables used today are complete.
+- Skip the notebook's optional fare histogram because it duplicates the warmup.
+- Count survivors by class. Ask what information the plot leaves unresolved.
+- Return to all passengers and calculate survival proportions. Explain the denominator and why the mean of a complete 0/1 field is a proportion.
+- Add sex to the grouping, with color distinguishing the source categories. Ask students for a prediction before running it.
+- End by proposing age as a next question. Avoid turning the demonstration into a survey of every Titanic variable.
+
+| Class | Survivors | Passengers | Survival proportion |
+|---|---:|---:|---:|
+| 1 | 136 | 216 | 63.0% |
+| 2 | 87 | 184 | 47.3% |
+| 3 | 119 | 491 | 24.2% |
+
+| Class | Female survivors / passengers | Female proportion | Male survivors / passengers | Male proportion |
+|---|---:|---:|---:|---:|
+| 1 | 91 / 94 | 96.8% | 45 / 122 | 36.9% |
+| 2 | 70 / 76 | 92.1% | 17 / 108 | 15.7% |
+| 3 | 72 / 144 | 50.0% | 47 / 347 | 13.5% |
+
+These are associations in the 891-record subset. They do not isolate causal effects or describe a complete passenger manifest. The completed notebook retains group sizes, so the color comparison does not conceal its denominators.
+
+If live coding takes too long, copy a cell from the completed notebook or use the plot-reference appendix. Protect the group investigation and sharing blocks.
+
+## A slightly deeper tornado orientation
+
+The three-minute introduction covers details that influence the analysis:
+
+1. **One row is one whole tornado track.** Extra state/county continuation records and one exact duplicate were removed in preparation. A track can cross state lines. Starting state does not list all states affected.
+2. **Types carry meaning.** The identifier is a label, EF is ordered, state is nominal, and length and width are quantities with different units. Do not infer measurement meaning from a column's storage dtype alone.
+3. **Clock time is CST for every record.** Comparing CST hours does not automatically compare local daylight or nighttime.
+4. **Missing ratings stay missing.** EF0 is valid. There are 111 unknown ratings, leaving 4,595 records with an observed rating. Students should decide whether their question requires those values before filtering.
+
+EF categories reflect damage surveys and estimated winds. They are not direct wind measurements, and a larger category number is not a ratio of wind speeds. Source: https://www.weather.gov/oun/efscale.
+
+The starter shows a few rows, column information and missingness, but no substantive tornado analysis. This gives students a foundation without steering their question choice.
+
+## The investigation
+
+During brainstorming, reward distinct questions that students can connect to available fields. Offer general prompts only if needed: distribution, comparison, relationship, time or space, unusual observations, and missingness.
+
+When groups select a question, ask which rows, variables, units, comparison, and any denominator would provide evidence. Words like dangerous or worst need a measurable definition.
+
+At around minute 25 ask what the first visualization leaves unresolved. At around minute 32 ask everyone to prepare their plot and explanation for regrouping.
+
+Circulation prompts:
+
+- What do you actually see in this view?
+- What does that leave unresolved?
+- How many records support the comparison?
+- Which observations drive the result?
+- What other view would help distinguish your explanations?
+
+Use the separate plotting reference for syntax support. Avoid supplying a shared tornado question or a worked tornado result.
+
+## Sharing and closing
+
+Randomly regroup students, aiming for groups of 3-4 from different original teams. Allow one minute to move, about two minutes per person, and remaining time for follow-up questions. Every student explains their original team's work independently.
+
+The closing asks for a visualization that changed a question, something the data could not fully answer, or a useful approach learned from someone else. A well-explained inconclusive result is useful.
+
+Bridge to Day 2: we compared Titanic passengers a few variables at a time. Next we will explore similarity across several characteristics together, then investigate how those profiles relate to survival.

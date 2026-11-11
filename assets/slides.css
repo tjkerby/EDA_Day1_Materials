@@ -1,0 +1,28 @@
+:root { --r-background-color: #fbfcfc; --r-main-font: Arial, sans-serif; --r-main-font-size: 29px; --r-main-color: #182d3b; --r-heading-font: Arial, sans-serif; --r-heading-color: #087f83; --r-heading-text-transform: none; --r-link-color: #087f83; }
+.reveal { font-family: Arial,sans-serif; font-size: 29px; line-height: 1.32; color: #182d3b; background: #fbfcfc; }
+.reveal .slides { text-align: left; }
+.reveal .slides section { box-sizing: border-box; padding: 24px 36px; }
+.reveal h1, .reveal h2 { color: #087f83; font-family: Arial,sans-serif; text-transform: none; font-weight: 700; letter-spacing: -.025em; line-height: 1.1; margin: 0 0 28px; }
+.reveal h1 { font-size: 1.6em; }
+.reveal h2 { font-size: 1.5em; }
+.reveal p { margin: 0 0 20px; }
+.reveal img { max-height: 330px; margin: 0; border: 0; box-shadow: none; }
+.reveal pre { font-size: 22px; width: 100%; box-shadow:none; background: #edf2f3; padding: 14px; box-sizing:border-box; white-space: pre-wrap; }
+.reveal pre code { max-height: none; color: #182d3b; white-space:pre-wrap; overflow-wrap:anywhere; }
+.reveal .columns { display:flex; gap:26px; align-items: flex-start; }
+.reveal .column { min-width:0; }
+.reveal .column p { font-size:25px; }
+.reveal .column figure { margin:0; }
+.reveal figcaption { display:none; }
+.reveal .slide-number { font-family:Arial,sans-serif; font-size:16px; background:transparent; color:#536c78; }
+.reveal .progress { color:#087f83; }
+.reveal .controls { color:#087f83; }
+.reveal section.cover { display:flex !important; flex-direction:column; justify-content:center; }
+.reveal section.cover h1 { font-size:64px; max-width:1000px; }
+.reveal section.cover p { font-size:30px; }
+.reveal .notes { display:none; }
+.reveal table { width:100%; border-collapse:collapse; font-size:23px; margin:18px 0; }
+.reveal th, .reveal td { text-align:left; padding:9px 12px; border-bottom:1px solid #cbd7db; }
+.reveal th { background:#edf4f4; }
+.reveal strong { color:#087f83; }
+@media print { .reveal .slides section { padding:24px 36px !important; } }

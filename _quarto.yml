@@ -1,0 +1,45 @@
+project:
+  type: website
+  output-dir: docs
+  pre-render:
+    - python scripts/prepare_downloads.py
+  render:
+    - index.qmd
+    - slides.qmd
+    - notebooks.qmd
+    - data_dictionary.qmd
+    - sources.qmd
+    - teaching_notes.qmd
+    - notebooks/titanic_complete.ipynb
+    - notebooks/titanic_live_scaffold.ipynb
+    - notebooks/tornadoes_starter.ipynb
+    - notebooks/plotting_reference.ipynb
+  resources:
+    - data/*.csv
+    - data/*.md
+    - notebooks/*.ipynb
+    - assets/*.png
+    - downloads/*.zip
+  post-render:
+    - python scripts/finalize_site.py
+website:
+  title: "STAT 386: EDA"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: slides.qmd
+        text: Slides
+      - href: notebooks.qmd
+        text: Notebooks
+      - href: data_dictionary.qmd
+        text: Data guide
+  page-footer:
+    left: "STAT 386 · Exploratory Data Analysis"
+format:
+  html:
+    theme: cosmo
+    css: assets/site.css
+    toc: true
+execute:
+  enabled: false
